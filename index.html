@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)file:///Users/isaacdiaz/Downloads/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Clock In/Out</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f7f9fc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    select, input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(145deg, #3cb371, #2e8b57);
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    #status {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Employee Clock In/Out</h2>
+
+    <select id="employee">
+      <option value="">-- Select Your Name --</option>
+      <option value="Jessica Hernandez">Jessica Hernandez</option>
+      <option value="Engelia Mota">Engelia Mota</option>
+      <option value="Leidy Arcos">Leidy Arcos</option>
+      <option value="Mayryory">Mayryory</option>
+    </select>
+
+    <input type="password" id="code" placeholder="Enter Your Personal Code">
+
+    <button onclick="handleClock(&#39;Clock In&#39;)">Clock In</button>
+    <button onclick="handleClock(&#39;Clock Out&#39;)">Clock Out</button>
+
+    <p id="status"></p>
+  </div>
+
+  <script>
+    const personalCodes = {
+      "Jessica Hernandez": "JH1234",
+      "Engelia Mota": "EM5678",
+      "Leidy Arcos": "LA9101",
+      "Mayryory": "MY1121"
+    };
+
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyqBgEYS0woUohtCRxZFbQ7w85Naq3Hs4a1AzIifjXnKYB6xvrGqbq6E6UkFUUPtorq/exec";
+
+    function handleClock(action) {
+      const name = document.getElementById("employee").value;
+      const code = document.getElementById("code").value;
+      const status = document.getElementById("status");
+
+      if (!name || !code) {
+        status.innerText = "Please fill all fields.";
+        status.style.color = "red";
+        return;
+      }
+
+      if (personalCodes[name] !== code) {
+        status.innerText = "❌ Invalid code.";
+        status.style.color = "red";
+        return;
+      }
+
+      takeSelfie().then(base64Image => {
+        const timestamp = new Date().toISOString();
+
+        const entry = {
+          name: name,
+          code: code,
+          action: action,
+          timestamp: timestamp,
+          photo: base64Image
+        };
+
+        fetch(WEB_APP_URL, {
+          method: "POST",
+          body: JSON.stringify(entry),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.result === "success") {
+            status.innerText = `${action} successful and logged!`;
+            status.style.color = "green";
+            document.getElementById("employee").value = "";
+            document.getElementById("code").value = "";
+          } else {
+            status.innerText = "Error logging data.";
+            status.style.color = "red";
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          status.innerText = "Failed to send data.";
+          status.style.color = "red";
+        });
+      }).catch(() => {
+        status.innerText = "❌ Failed to capture image.";
+        status.style.color = "red";
+      });
+    }
+
+    function takeSelfie() {
+      return new Promise((resolve, reject) => {
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = "image/*";
+        input.capture = "user";
+        input.style.display = "none";
+        document.body.appendChild(input);
+
+        input.onchange = () => {
+          const file = input.files[0];
+          const reader = new FileReader();
+
+          reader.onloadend = () => resolve(reader.result);
+          reader.onerror = reject;
+
+          if (file) {
+            reader.readAsDataURL(file);
+          } else {
+            reject();
+          }
+        };
+
+        input.click();
+      });
+    }
+  </script>
+
+
+
+</body></html>
