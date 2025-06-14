@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!-- saved from url=(0044)file:///Users/isaacdiaz/Downloads/index.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Employee Clock In/Out</title>
   <style>
     body {
@@ -71,10 +71,10 @@
       <option value="Mayryory">Mayryory</option>
     </select>
 
-    <input type="password" id="code" placeholder="Enter Your Personal Code">
+    <input type="password" id="code" placeholder="Enter Your Personal Code" />
 
-    <button onclick="handleClock(&#39;Clock In&#39;)">Clock In</button>
-    <button onclick="handleClock(&#39;Clock Out&#39;)">Clock Out</button>
+    <button onclick="handleClock('Clock In')">Clock In</button>
+    <button onclick="handleClock('Clock Out')">Clock Out</button>
 
     <p id="status"></p>
   </div>
@@ -119,25 +119,20 @@
 
         fetch(WEB_APP_URL, {
           method: "POST",
-          body: JSON.stringify(entry),
+          mode: "no-cors",
           headers: {
             "Content-Type": "application/json"
-          }
+          },
+          body: JSON.stringify(entry)
         })
-        .then(res => res.json())
-        .then(data => {
-          if (data.result === "success") {
-            status.innerText = `${action} successful and logged!`;
-            status.style.color = "green";
-            document.getElementById("employee").value = "";
-            document.getElementById("code").value = "";
-          } else {
-            status.innerText = "Error logging data.";
-            status.style.color = "red";
-          }
+        .then(() => {
+          status.innerText = `${action} submitted!`;
+          status.style.color = "green";
+          document.getElementById("employee").value = "";
+          document.getElementById("code").value = "";
         })
-        .catch(err => {
-          console.error(err);
+        .catch((error) => {
+          console.error("Fetch error:", error);
           status.innerText = "Failed to send data.";
           status.style.color = "red";
         });
@@ -175,6 +170,5 @@
     }
   </script>
 
-
-
-</body></html>
+</body>
+</html>
