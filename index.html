@@ -61,20 +61,23 @@
 <body>
 
   <div class="container">
-    <h2>Employee Clock In/Out</h2>
+    <h2>Employee Check in/Out</h2>
 
     <select id="employee">
       <option value="">-- Select Your Name --</option>
       <option value="Jessica Hernandez">Jessica Hernandez</option>
-      <option value="Engelia Mota">Engelia Mota</option>
+      <option value="Engeli Mota">Engelia Mota</option>
       <option value="Leidy Arcos">Leidy Arcos</option>
       <option value="Mayryory">Mayryory</option>
+      <option value="Enrique Uribe">Enrique Uribe</option>
+      <option value="Leydi Arcos">Leydi Arcos</option>
+      <option value="Other">Other</option>
     </select>
 
     <input type="password" id="code" placeholder="Enter Your Personal Code" />
 
-    <button onclick="handleClock('Clock In')">Clock In</button>
-    <button onclick="handleClock('Clock Out')">Clock Out</button>
+    <button onclick="handleClock('Clock In')">Check in</button>
+    <button onclick="handleClock('Clock Out')">Check Out</button>
 
     <p id="status"></p>
   </div>
@@ -82,9 +85,10 @@
   <script>
     const personalCodes = {
       "Jessica Hernandez": "JH1234",
-      "Engelia Mota": "EM5678",
-      "Leidy Arcos": "LA9101",
-      "Mayryory": "MY1121"
+      "Engeli Mota": "EM1234",
+      "Leidy Arcos": "LA1234",
+      "Mayryory": "M1234"
+      "Other": "Other"
     }
 
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyz-N_CFEoBIR1-wArGOxiwf9S5KaCvdQzMAaG_q2Fo8pRcn0Lztqn0nLP-N4DQAQzurg/exec";
