@@ -56,6 +56,26 @@
       margin-top: 10px;
       font-weight: bold;
     }
+
+    #loading {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3cb371;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 10px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -76,10 +96,15 @@
 
     <input type="password" id="code" placeholder="Enter Your Personal Code" />
 
-    <button onclick="handleClock('Clock In')">Check in</button>
-    <button onclick="handleClock('Clock Out')">Check Out</button>
+    <button id="btn-in" onclick="handleClock('Clock In')">Check in</button>
+    <button id="btn-out" onclick="handleClock('Clock Out')">Check Out</button>
 
     <p id="status"></p>
+
+    <div id="loading">
+      <p style="font-weight: bold; color: #555;">Submitting...</p>
+      <div class="spinner"></div>
+    </div>
   </div>
 
   <script>
@@ -89,7 +114,7 @@
       "Leidy Arcos": "LA1234",
       "Mayryory": "M1234",
       "Other": "Other"
-    }
+    };
 
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyz-N_CFEoBIR1-wArGOxiwf9S5KaCvdQzMAaG_q2Fo8pRcn0Lztqn0nLP-N4DQAQzurg/exec";
 
@@ -97,6 +122,9 @@
       const name = document.getElementById("employee").value;
       const code = document.getElementById("code").value;
       const status = document.getElementById("status");
+      const loading = document.getElementById("loading");
+      const btnIn = document.getElementById("btn-in");
+      const btnOut = document.getElementById("btn-out");
 
       if (!name || !code) {
         status.innerText = "Please fill all fields.";
@@ -109,6 +137,12 @@
         status.style.color = "red";
         return;
       }
+
+      // Show loading & disable buttons
+      loading.style.display = "block";
+      btnIn.disabled = true;
+      btnOut.disabled = true;
+      status.innerText = "";
 
       takeSelfie().then(base64Image => {
         const timestamp = new Date().toISOString();
@@ -130,17 +164,26 @@
           body: JSON.stringify(entry)
         })
         .then(() => {
+          loading.style.display = "none";
+          btnIn.disabled = false;
+          btnOut.disabled = false;
           status.innerText = `${action} submitted!`;
           status.style.color = "green";
           document.getElementById("employee").value = "";
           document.getElementById("code").value = "";
         })
         .catch((error) => {
+          loading.style.display = "none";
+          btnIn.disabled = false;
+          btnOut.disabled = false;
           console.error("Fetch error:", error);
           status.innerText = "Failed to send data.";
           status.style.color = "red";
         });
       }).catch(() => {
+        loading.style.display = "none";
+        btnIn.disabled = false;
+        btnOut.disabled = false;
         status.innerText = "❌ Failed to capture image.";
         status.style.color = "red";
       });
