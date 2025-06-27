@@ -42,10 +42,17 @@
       font-size: 16px;
       font-weight: bold;
       color: white;
-      background: linear-gradient(145deg, #3cb371, #2e8b57);
       border: none;
       border-radius: 14px;
       cursor: pointer;
+    }
+
+    #btn-in {
+      background: linear-gradient(145deg, #3cb371, #2e8b57);
+    }
+
+    #btn-out {
+      background: linear-gradient(145deg, #e53935, #b71c1c);
     }
 
     button:hover {
@@ -81,7 +88,7 @@
 <body>
 
   <div class="container">
-    <h2>Employee Check in/Out</h2>
+    <h2>Employee Clock In/Out</h2>
 
     <select id="employee">
       <option value="">-- Select Your Name --</option>
@@ -95,8 +102,8 @@
 
     <input type="password" id="code" placeholder="Enter Your Personal Code" />
 
-    <button id="btn-in" onclick="handleClock('Clock In')">Check in</button>
-    <button id="btn-out" onclick="handleClock('Clock Out')">Check Out</button>
+    <button id="btn-in" onclick="handleClock('Clock In')">Entrada</button>
+    <button id="btn-out" onclick="handleClock('Clock Out')">Salida</button>
 
     <p id="status"></p>
 
@@ -108,14 +115,13 @@
 
   <script>
     const personalCodes = {
-  "Jessica Hernandez": "JH1234",
-  "Engeli Mota": "EM1234",
-  "Leydi Arcos": "LA1234", // ← corrected spelling
-  "Mayryory": "M1234",
-  "Enrique Uribe": "EU1234",
-  "Other": "Other"
-};
-
+      "Jessica Hernandez": "JH1234",
+      "Engeli Mota": "EM1234",
+      "Leydi Arcos": "LA1234",
+      "Mayryory": "M1234",
+      "Enrique Uribe": "EU1234",
+      "Other": "Other"
+    };
 
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyfiahVZvg_ERtj9UMgm4IRL84mzNb_Zo8h7a7RxqzhyO391NO8fFTB_3QUnXO5ZFg5zg/exec";
 
@@ -139,7 +145,6 @@
         return;
       }
 
-      // Show loading & disable buttons
       loading.style.display = "block";
       btnIn.disabled = true;
       btnOut.disabled = true;
