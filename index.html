@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Registro de Entrada / Salida</title>
+  <title>Employee Clock In/Out</title>
   <style>
     body {
       font-family: sans-serif;
@@ -88,19 +88,19 @@
 <body>
 
   <div class="container">
-    <h2>Registro de Entrada / Salida</h2>
+    <h2>Employee Clock In/Out</h2>
 
     <select id="employee">
-      <option value="">-- Selecciona tu nombre --</option>
+      <option value="">-- Select Your Name --</option>
       <option value="Jessica Hernandez">Jessica Hernandez</option>
       <option value="Engeli Mota">Engeli Mota</option>
       <option value="Mayryory">Mayryory</option>
       <option value="Enrique Uribe">Enrique Uribe</option>
       <option value="Leydi Arcos">Leydi Arcos</option>
-      <option value="Other">Otro / Other</option>
+      <option value="Other">Other</option>
     </select>
 
-    <input type="password" id="code" placeholder="Código personal" />
+    <input type="password" id="code" placeholder="Enter Your Personal Code" />
 
     <button id="btn-in" onclick="handleClock('Clock In')">Entrada</button>
     <button id="btn-out" onclick="handleClock('Clock Out')">Salida</button>
@@ -108,7 +108,7 @@
     <p id="status"></p>
 
     <div id="loading">
-      <p style="font-weight: bold; color: #555;">Enviando...</p>
+      <p style="font-weight: bold; color: #555;">Submitting...</p>
       <div class="spinner"></div>
     </div>
   </div>
@@ -123,7 +123,7 @@
       "Other": "Other"
     };
 
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyh_ZAj73_Ir622s4jl9ttIgp45MXEnBypzY3bs77CjgM58ssCQ2kd-b5gOmbbsgJ7xcw/exec"; // Replace with your actual Web App URL
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyfiahVZvg_ERtj9UMgm4IRL84mzNb_Zo8h7a7RxqzhyO391NO8fFTB_3QUnXO5ZFg5zg/exec";
 
     function handleClock(action) {
       const name = document.getElementById("employee").value;
@@ -134,13 +134,13 @@
       const btnOut = document.getElementById("btn-out");
 
       if (!name || !code) {
-        status.innerText = "Completa todos los campos.";
+        status.innerText = "Please fill all fields.";
         status.style.color = "red";
         return;
       }
 
       if (personalCodes[name] !== code) {
-        status.innerText = "❌ Código incorrecto.";
+        status.innerText = "❌ Invalid code.";
         status.style.color = "red";
         return;
       }
@@ -154,10 +154,10 @@
         const timestamp = new Date().toISOString();
 
         const entry = {
-          name,
-          code,
-          action,
-          timestamp,
+          name: name,
+          code: code,
+          action: action,
+          timestamp: timestamp,
           photo: base64Image
         };
 
@@ -173,7 +173,7 @@
           loading.style.display = "none";
           btnIn.disabled = false;
           btnOut.disabled = false;
-          status.innerText = `${action === "Clock In" ? "Entrada" : "Salida"} enviada con éxito ✅`;
+          status.innerText = `${action} submitted!`;
           status.style.color = "green";
           document.getElementById("employee").value = "";
           document.getElementById("code").value = "";
@@ -183,14 +183,14 @@
           btnIn.disabled = false;
           btnOut.disabled = false;
           console.error("Fetch error:", error);
-          status.innerText = "Error al enviar los datos.";
+          status.innerText = "Failed to send data.";
           status.style.color = "red";
         });
       }).catch(() => {
         loading.style.display = "none";
         btnIn.disabled = false;
         btnOut.disabled = false;
-        status.innerText = "❌ No se pudo capturar la foto.";
+        status.innerText = "❌ Failed to capture image.";
         status.style.color = "red";
       });
     }
