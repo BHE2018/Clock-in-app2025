@@ -91,14 +91,30 @@
     <h2>Employee Clock In/Out</h2>
 
     <select id="employee">
-      <option value="">-- Select Your Name --</option>
-      <option value="Jessica Hernandez">Jessica Hernandez</option>
-      <option value="Engeli Mota">Engeli Mota</option>
-      <option value="Mayryory">Mayryory</option>
-      <option value="Enrique Uribe">Enrique Uribe</option>
-      <option value="Leydi Arcos">Leydi Arcos</option>
-      <option value="Other">Other</option>
-    </select>
+  <option value="">-- Select Your Name --</option>
+  <option value="Adolfo Gonzalez">Adolfo Gonzalez</option>
+  <option value="Agustin Ramirez">Agustin Ramirez</option>
+  <option value="Alberto Diaz">Alberto Diaz</option>
+  <option value="Armando Ramirez">Armando Ramirez</option>
+  <option value="Diego Lugo">Diego Lugo</option>
+  <option value="Fernando Garcia">Fernando Garcia</option>
+  <option value="Filiberto Tovar">Filiberto Tovar</option>
+  <option value="Guillermo Zurita">Guillermo Zurita</option>
+  <option value="Gustavo Tovar">Gustavo Tovar</option>
+  <option value="Jose Cesareo">Jose Cesareo</option>
+  <option value="Jose Guadalupe">Jose Guadalupe</option>
+  <option value="Joseph Vasquez">Joseph Vasquez</option>
+  <option value="Juan Jose Martinez">Juan Jose Martinez</option>
+  <option value="Juan Ortega">Juan Ortega</option>
+  <option value="Lucio Ramirez">Lucio Ramirez</option>
+  <option value="Martin Suarez">Martin Suarez</option>
+  <option value="Maynor Cabrera">Maynor Cabrera</option>
+  <option value="Miguel Angel">Miguel Angel</option>
+  <option value="Raul Zuniga">Raul Zuniga</option>
+  <option value="Jose Moreno">Jose Moreno</option>
+  <option value="Other">Other</option>
+</select>
+
 
     <input type="password" id="code" placeholder="Enter Your Personal Code" />
 
@@ -113,17 +129,33 @@
     </div>
   </div>
 
-  <script>
-    const personalCodes = {
-      "Jessica Hernandez": "JH1234",
-      "Engeli Mota": "EM1234",
-      "Leydi Arcos": "LA1234",
-      "Mayryory": "M1234",
-      "Enrique Uribe": "EU1234",
-      "Other": "Other"
-    };
+<script>
+const personalCodes = {
+  "Adolfo Gonzalez": "AG1234",
+  "Agustin Ramirez": "AR1234",
+  "Alberto Diaz": "AD1234",
+  "Armando Ramirez": "AR1234",
+  "Diego Lugo": "DL1234",
+  "Fernando Garcia": "FG1234",
+  "Filiberto Tovar": "FT1234",
+  "Guillermo Zurita": "GZ1234",
+  "Gustavo Tovar": "GT1234",
+  "Jose Cesareo": "JC1234",
+  "Jose Guadalupe": "JG1234",
+  "Joseph Vasquez": "JV1234",
+  "Juan Jose Martinez": "JM1234",
+  "Juan Ortega": "JO1234",
+  "Lucio Ramirez": "LR1234",
+  "Martin Suarez": "MS1234",
+  "Maynor Cabrera": "MC1234",
+  "Miguel Angel": "MA1234",
+  "Raul Zuniga": "RZ1234",
+  "Jose Moreno": "JM1234",
+  "Other": "Other"
+};
 
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxxnS6mDV1KJi2rYtve8h-UPRanOh2WHE3GJPbHeII8_ypqhFFmytygOvbjOiAn4A-Fcg/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxxnS6mDV1KJi2rYtve8h-UPRanOh2WHE3GJPbHeII8_ypqhFFmytygOvbjOiAn4A-Fcg/exec";
+
 
     function handleClock(action) {
       const name = document.getElementById("employee").value;
