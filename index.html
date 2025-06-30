@@ -91,40 +91,38 @@
     <h2>Employee Clock In/Out</h2>
 
     <select id="employee">
-  <option value="">-- Select Your Name --</option>
-  <option value="Adolfo Gonzalez">Adolfo Gonzalez</option>
-  <option value="Agustin Ramirez">Agustin Ramirez</option>
-  <option value="Alberto Diaz">Alberto Diaz</option>
-  <option value="Armando Ramirez">Armando Ramirez</option>
-  <option value="Diego Lugo">Diego Lugo</option>
-  <option value="Engeli Mota">Engeli Mota</option>
-  <option value="Enrique Uribe">Enrique Uribe</option>
-  <option value="Fernando Garcia">Fernando Garcia</option>
-  <option value="Filiberto Tovar">Filiberto Tovar</option>
-  <option value="Guillermo Zurita">Guillermo Zurita</option>
-  <option value="Gustavo Tovar">Gustavo Tovar</option>
-  <option value="Isaac Diaz">Isaac Diaz</option>
-  <option value="Jose Cesareo">Jose Cesareo</option>
-  <option value="Jose Guadalupe">Jose Guadalupe</option>
-  <option value="Jose Moreno">Jose Moreno</option>
-  <option value="Joseph Vasquez">Joseph Vasquez</option>
-  <option value="Juan Jose Martinez">Juan Jose Martinez</option>
-  <option value="Juan Ortega">Juan Ortega</option>
-  <option value="Leydi Arcos">Leydi Arcos</option>
-  <option value="Lucio Ramirez">Lucio Ramirez</option>
-  <option value="Martin Suarez">Martin Suarez</option>
-  <option value="Maynor Cabrera">Maynor Cabrera</option>
-  <option value="Mayryory Abreu">Mayryory Abreu</option>
-  <option value="Miguel Angel">Miguel Angel</option>
-  <option value="Raul Zuniga">Raul Zuniga</option>
-  <option value="Yessica Hernandez">Yessica Hernandez</option>
-  <option value="Other">Other</option>
-</select>
-
+      <option value="">-- Select Your Name --</option>
+      <option value="Adolfo Gonzalez">Adolfo Gonzalez</option>
+      <option value="Agustin Ramirez">Agustin Ramirez</option>
+      <option value="Alberto Diaz">Alberto Diaz</option>
+      <option value="Armando Ramirez">Armando Ramirez</option>
+      <option value="Diego Lugo">Diego Lugo</option>
+      <option value="Engeli Mota">Engeli Mota</option>
+      <option value="Enrique Uribe">Enrique Uribe</option>
+      <option value="Fernando Garcia">Fernando Garcia</option>
+      <option value="Filiberto Tovar">Filiberto Tovar</option>
+      <option value="Guillermo Zurita">Guillermo Zurita</option>
+      <option value="Gustavo Tovar">Gustavo Tovar</option>
+      <option value="Isaac Diaz">Isaac Diaz</option>
+      <option value="Jose Cesareo">Jose Cesareo</option>
+      <option value="Jose Guadalupe">Jose Guadalupe</option>
+      <option value="Jose Moreno">Jose Moreno</option>
+      <option value="Joseph Vasquez">Joseph Vasquez</option>
+      <option value="Juan Jose Martinez">Juan Jose Martinez</option>
+      <option value="Juan Ortega">Juan Ortega</option>
+      <option value="Leydi Arcos">Leydi Arcos</option>
+      <option value="Lucio Ramirez">Lucio Ramirez</option>
+      <option value="Martin Suarez">Martin Suarez</option>
+      <option value="Maynor Cabrera">Maynor Cabrera</option>
+      <option value="Mayryory Abreu">Mayryory Abreu</option>
+      <option value="Miguel Angel">Miguel Angel</option>
+      <option value="Raul Zuniga">Raul Zuniga</option>
+      <option value="Yessica Hernandez">Yessica Hernandez</option>
+      <option value="Other">Other</option>
+    </select>
 
     <input type="password" id="code" placeholder="Enter Your Personal Code" />
 
-    <!-- NEW Horas Extra Dropdown -->
     <select id="extraHours">
       <option value="">Horas Extras?</option>
       <option value="1">1 hora</option>
@@ -144,141 +142,139 @@
     </div>
   </div>
 
-<script>
-const personalCodes = {
-  "Adolfo Gonzalez": "AG1234",
-  "Agustin Ramirez": "AR1234",
-  "Alberto Diaz": "AD1234",
-  "Armando Ramirez": "AR1234",
-  "Diego Lugo": "DL1234",
-  "Engeli Mota": "EM1234",
-  "Enrique Uribe": "EU1234",
-  "Fernando Garcia": "FG1234",
-  "Filiberto Tovar": "FT1234",
-  "Guillermo Zurita": "GZ1234",
-  "Gustavo Tovar": "GT1234",
-  "Isaac Diaz": "ID1234",
-  "Jose Cesareo": "JC1234",
-  "Jose Guadalupe": "JG1234",
-  "Jose Moreno": "JM1234",
-  "Joseph Vasquez": "JV1234",
-  "Juan Jose Martinez": "JM1234",
-  "Juan Ortega": "JO1234",
-  "Leydi Arcos": "LA1234",
-  "Lucio Ramirez": "LR1234",
-  "Martin Suarez": "MS1234",
-  "Maynor Cabrera": "MC1234",
-  "Mayryory Abreu": "MA1234",
-  "Miguel Angel": "MA1234",
-  "Other": "Other",
-  "Raul Zuniga": "RZ1234",
-  "Yessica Hernandez": "YH1234"
-};
-</script>
-
-
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzi9Xek7kbqQBrQt7JTgpWIScCofpiV5CaNcdhfS9ZsHIjZs4JsVtTGyZiKFHw-426gdg/exec";
-
-function handleClock(action) {
-  const name = document.getElementById("employee").value;
-  const code = document.getElementById("code").value;
-  const extraHours = document.getElementById("extraHours").value;
-  const status = document.getElementById("status");
-  const loading = document.getElementById("loading");
-  const btnIn = document.getElementById("btn-in");
-  const btnOut = document.getElementById("btn-out");
-
-  if (!name || !code) {
-    status.innerText = "Please fill all fields.";
-    status.style.color = "red";
-    return;
-  }
-
-  if (personalCodes[name] !== code) {
-    status.innerText = "❌ Invalid code.";
-    status.style.color = "red";
-    return;
-  }
-
-  loading.style.display = "block";
-  btnIn.disabled = true;
-  btnOut.disabled = true;
-  status.innerText = "";
-
-  takeSelfie().then(base64Image => {
-    const timestamp = new Date().toISOString();
-
-    const entry = {
-      name: name,
-      code: code,
-      action: action,
-      timestamp: timestamp,
-      extraHours: extraHours || "",
-      photo: base64Image
+  <script>
+    const personalCodes = {
+      "Adolfo Gonzalez": "AG1234",
+      "Agustin Ramirez": "AR1234",
+      "Alberto Diaz": "AD1234",
+      "Armando Ramirez": "AR1234",
+      "Diego Lugo": "DL1234",
+      "Engeli Mota": "EM1234",
+      "Enrique Uribe": "EU1234",
+      "Fernando Garcia": "FG1234",
+      "Filiberto Tovar": "FT1234",
+      "Guillermo Zurita": "GZ1234",
+      "Gustavo Tovar": "GT1234",
+      "Isaac Diaz": "ID1234",
+      "Jose Cesareo": "JC1234",
+      "Jose Guadalupe": "JG1234",
+      "Jose Moreno": "JM1234",
+      "Joseph Vasquez": "JV1234",
+      "Juan Jose Martinez": "JM1234",
+      "Juan Ortega": "JO1234",
+      "Leydi Arcos": "LA1234",
+      "Lucio Ramirez": "LR1234",
+      "Martin Suarez": "MS1234",
+      "Maynor Cabrera": "MC1234",
+      "Mayryory Abreu": "MA1234",
+      "Miguel Angel": "MA1234",
+      "Other": "Other",
+      "Raul Zuniga": "RZ1234",
+      "Yessica Hernandez": "YH1234"
     };
 
-    fetch(WEB_APP_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(entry)
-    })
-    .then(() => {
-      loading.style.display = "none";
-      btnIn.disabled = false;
-      btnOut.disabled = false;
-      status.innerText = `${action} submitted!`;
-      status.style.color = "green";
-      document.getElementById("employee").value = "";
-      document.getElementById("code").value = "";
-      document.getElementById("extraHours").value = "";
-    })
-    .catch((error) => {
-      loading.style.display = "none";
-      btnIn.disabled = false;
-      btnOut.disabled = false;
-      console.error("Fetch error:", error);
-      status.innerText = "Failed to send data.";
-      status.style.color = "red";
-    });
-  }).catch(() => {
-    loading.style.display = "none";
-    btnIn.disabled = false;
-    btnOut.disabled = false;
-    status.innerText = "❌ Failed to capture image.";
-    status.style.color = "red";
-  });
-}
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzi9Xek7kbqQBrQt7JTgpWIScCofpiV5CaNcdhfS9ZsHIjZs4JsVtTGyZiKFHw-426gdg/exec";
 
-function takeSelfie() {
-  return new Promise((resolve, reject) => {
-    const input = document.createElement("input");
-    input.type = "file";
-    input.accept = "image/*";
-    input.capture = "user";
-    input.style.display = "none";
-    document.body.appendChild(input);
+    function handleClock(action) {
+      const name = document.getElementById("employee").value;
+      const code = document.getElementById("code").value;
+      const extraHours = document.getElementById("extraHours").value;
+      const status = document.getElementById("status");
+      const loading = document.getElementById("loading");
+      const btnIn = document.getElementById("btn-in");
+      const btnOut = document.getElementById("btn-out");
 
-    input.onchange = () => {
-      const file = input.files[0];
-      const reader = new FileReader();
-
-      reader.onloadend = () => resolve(reader.result);
-      reader.onerror = reject;
-
-      if (file) {
-        reader.readAsDataURL(file);
-      } else {
-        reject();
+      if (!name || !code) {
+        status.innerText = "Please fill all fields.";
+        status.style.color = "red";
+        return;
       }
-    };
 
-    input.click();
-  });
-}
-</script>
+      if (personalCodes[name] !== code) {
+        status.innerText = "❌ Invalid code.";
+        status.style.color = "red";
+        return;
+      }
+
+      loading.style.display = "block";
+      btnIn.disabled = true;
+      btnOut.disabled = true;
+      status.innerText = "";
+
+      takeSelfie().then(base64Image => {
+        const timestamp = new Date().toISOString();
+
+        const entry = {
+          name: name,
+          code: code,
+          action: action,
+          timestamp: timestamp,
+          extraHours: extraHours || "",
+          photo: base64Image
+        };
+
+        fetch(WEB_APP_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(entry)
+        })
+        .then(() => {
+          loading.style.display = "none";
+          btnIn.disabled = false;
+          btnOut.disabled = false;
+          status.innerText = `${action} submitted!`;
+          status.style.color = "green";
+          document.getElementById("employee").value = "";
+          document.getElementById("code").value = "";
+          document.getElementById("extraHours").value = "";
+        })
+        .catch((error) => {
+          loading.style.display = "none";
+          btnIn.disabled = false;
+          btnOut.disabled = false;
+          console.error("Fetch error:", error);
+          status.innerText = "Failed to send data.";
+          status.style.color = "red";
+        });
+      }).catch(() => {
+        loading.style.display = "none";
+        btnIn.disabled = false;
+        btnOut.disabled = false;
+        status.innerText = "❌ Failed to capture image.";
+        status.style.color = "red";
+      });
+    }
+
+    function takeSelfie() {
+      return new Promise((resolve, reject) => {
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = "image/*";
+        input.capture = "user";
+        input.style.display = "none";
+        document.body.appendChild(input);
+
+        input.onchange = () => {
+          const file = input.files[0];
+          const reader = new FileReader();
+
+          reader.onloadend = () => resolve(reader.result);
+          reader.onerror = reject;
+
+          if (file) {
+            reader.readAsDataURL(file);
+          } else {
+            reject();
+          }
+        };
+
+        input.click();
+      });
+    }
+  </script>
 
 </body>
 </html>
